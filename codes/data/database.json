@@ -1,0 +1,56 @@
+{
+    "User": {
+        "2": {
+            "username": "amir",
+            "password": "12345678",
+            "id": 2
+        },
+        "3": {
+            "username": "amin",
+            "password": "12345678",
+            "id": 3
+        },
+        "4": {
+            "username": "omid",
+            "password": "13761376",
+            "id": 4
+        },
+        "5": {
+            "username": "amirbaxxter",
+            "password": "test",
+            "id": 5
+        },
+        "6": {
+            "username": "amirbaxxter2",
+            "password": "test",
+            "id": 6
+        }
+    },
+    "Book": {
+        "1": {
+            "title": "test",
+            "author": "test",
+            "isbn": "test",
+            "id": 1
+        }
+    },
+    "LoanBook": {
+        "1": {
+            "user": {
+                "username": "amir",
+                "password": "12345678",
+                "id": 2
+            },
+            "book": {
+                "title": "test",
+                "author": "test",
+                "isbn": "test",
+                "id": 1
+            },
+            "loan_date": "2021-01-01",
+            "return_date": "2021-01-02",
+            "is_returned": false,
+            "id": 1
+        }
+    }
+}
