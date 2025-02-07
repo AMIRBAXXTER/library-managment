@@ -1,50 +1,13 @@
+import atexit
 import json
 import os
 
-
-class IDManager:
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-
-        if cls._instance is None:
-            cls._instance = super(IDManager, cls).__new__(cls, *args, **kwargs)
-        return cls._instance
-
-    def __init__(self):
-
-        self.file_dir = 'data/ids.json'
-        self._initialize_ids()
-        self.ids = {}
-        self._load_ids()
-
-    def _initialize_ids(self):
-
-        if not os.path.exists(self.file_dir):
-            os.makedirs(os.path.dirname(self.file_dir), exist_ok=True)
-            with open(self.file_dir, 'w') as file:
-                json.dump({}, file)
-
-    def _load_ids(self):
-
-        with open(self.file_dir, 'r') as file:
-            self.ids = json.load(file)
-
-    def _write_ids(self):
-
-        with open(self.file_dir, 'w') as file:
-            json.dump(self.ids, file, indent=4)
-
-    def get_id(self, entity_class):
-
-        if entity_class not in self.ids:
-            self.ids[entity_class] = 0
-        self.ids[entity_class] += 1
-        self._write_ids()
-        return self.ids[entity_class]
+import config
+from models import User
+from utils import LoadOrInitializeMixin, IDManager, hash_password
 
 
-class JsonDatabase:
+class JsonDatabase(LoadOrInitializeMixin):
     _instance = None
 
     def __new__(cls, *args, **kwargs):
@@ -55,34 +18,25 @@ class JsonDatabase:
 
     def __init__(self):
 
+        super().__init__()
         self.file_dir = 'data/database.json'
-        self._initialize_database()
         self.id_manager = IDManager()
-        self.data = {}
-        self._load_data()
+        self.data = self._load_or_initialize_data()
+        self.data_modified = False
+        self.set_admin()
 
-    def _initialize_database(self):
-
-        if not os.path.exists(self.file_dir):
-            os.makedirs(os.path.dirname(self.file_dir), exist_ok=True)
-            with open(self.file_dir, 'w') as file:
-                json.dump({}, file)
-
-    def _load_data(self):
-
-        with open(self.file_dir, 'r') as file:
-            self.data = json.load(file)
+        atexit.register(self._exit_handler)
 
     def _write_data(self):
-
-        with open(self.file_dir, 'w') as file:
-            json.dump(self.data, file, indent=4)
+        if self.data_modified:
+            print(f'Saving data to {self.file_dir}')
+            with open(self.file_dir, 'w') as file:
+                json.dump(self.data, file, indent=4)
+            self.data_modified = False
 
     def is_unique(self, entity_class, entity):
-        if hasattr(entity_class, 'UniqueFields'):
-            unique_fields = [field for field in entity.__class__.UniqueFields or []] + ['id']
-        else:
-            unique_fields = ['id']
+
+        unique_fields = getattr(entity_class, 'UniqueFields', []) + ['id']
 
         for field in unique_fields:
             if self.exists(entity_class, **{field: entity.__dict__[field]}):
@@ -100,9 +54,10 @@ class JsonDatabase:
         entity.__dict__['id'] = entity_id
 
         if not self.is_unique(entity.__class__, entity):
-            return
+            return False
         self.data[entity_class][entity_id] = entity.__dict__
-        self._write_data()
+        self.data_modified = True
+        return True
 
     def get(self, entity_class, entity_id):
 
@@ -123,33 +78,32 @@ class JsonDatabase:
                 else:
                     print(f'{key} is not a valid field')
             self.data[entity_class.__name__][entity_id] = entity
-            self._write_data()
+            self.data_modified = True
+        return entity
 
     def delete(self, entity_class, entity_id):
 
         entity = self.get(entity_class, entity_id)
         if entity:
             del self.data[entity_class.__name__][entity_id]
-            self._write_data()
+            self.data_modified = True
 
     def filter(self, entity_class, **kwargs):
 
         class_name = entity_class.__name__
-        if class_name not in self.data:
-            return []
+
         return [entity for entity in self.data[class_name].values() if
                 all(entity[key] == value for key, value in kwargs.items())]
 
     def all(self, entity_class):
 
         class_name = entity_class.__name__
-        if class_name not in self.data:
-            return []
+
         return [entity for entity in self.data[class_name].values()]
 
     def exists(self, entity_class, **kwargs):
 
-        return len(self.filter(entity_class, **kwargs)) > 0
+        return any(self.filter(entity_class, **kwargs))
 
     def count(self, entity_class):
 
@@ -159,4 +113,15 @@ class JsonDatabase:
     def clear(self):
 
         self.data = {}
+        self.data_modified = True
+
+    def _exit_handler(self):
+
         self._write_data()
+
+    def set_admin(self):
+        if not self.data:
+            admin_password = hash_password(config.ADMIN_PASSWORD)
+            admin = User(config.ADMIN_USERNAME, admin_password)
+            admin.is_admin = True
+            self.save(admin)

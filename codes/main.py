@@ -1,8 +1,7 @@
 from json_database import JsonDatabase
-from models import User, Book, LoanBook
+from menu import Menu
 
 if __name__ == '__main__':
     db = JsonDatabase()
-    users = db.all(User)
-    for user in users:
-        print(user['username'])
+    menu = Menu(db)
+    menu.main_menu()
