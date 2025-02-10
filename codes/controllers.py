@@ -79,6 +79,15 @@ class LoanController:
     def __init__(self, db):
         self.db = db
 
+    def create_loan(self, book_id, user_id, status='pending'):
+        book = self.db.get(Book, book_id)
+        user = self.db.get(User, user_id)
+        if book and user:
+            loan = LoanBook(book_id, user_id, status)
+            created = self.db.save(loan)
+            if created:
+                print(f'Loan {book_id} created')
+
     def update_loan(self, loan_id, values: dict):
         loan = self.db.update(LoanBook, loan_id, values)
         if loan:

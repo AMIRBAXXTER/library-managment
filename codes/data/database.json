@@ -5,6 +5,12 @@
             "password": "JDJiJDEyJG9lcGNZbllyUmJzbi9iZDRYVkM0N3VmQWdtRFpxQkFIbldMN1B5L0VxSWZXRmlYVHk3eGNL",
             "is_admin": true,
             "id": 1
+        },
+        "2": {
+            "username": "amirbaxxter",
+            "password": "JDJiJDEyJDhqc04uay5FeUpYbEVDZm1rbDJjUC5jVkR2Vmx1eW51NU05UEZ2NDgubnBtbk5oeWFGQmVp",
+            "is_admin": false,
+            "id": 2
         }
     }
 }

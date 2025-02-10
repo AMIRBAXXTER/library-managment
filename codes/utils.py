@@ -79,7 +79,7 @@ class IDManager(LoadOrInitializeMixin):
         return self.ids[entity_class]
 
 
-def print_stars(func):
+def print_separator(func):
     def wrapper(*args, **kwargs):
         print(config.SEPERATOR_CHAR * 50)
         result = func(*args, **kwargs)
@@ -87,12 +87,3 @@ def print_stars(func):
         return result
 
     return wrapper
-
-
-class DecoratedMethodsMeta(type):
-
-    def __new__(cls, name, bases, attrs):
-        for attr_name, attr_value in attrs.items():
-            if callable(attr_value) and not attr_name.startswith('__'):
-                attrs[attr_name] = print_stars(attr_value)
-        return super().__new__(cls, name, bases, attrs)

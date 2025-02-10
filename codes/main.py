@@ -1,7 +1,8 @@
 from json_database import JsonDatabase
-from menu import Menu
+from menu import MainMenu
 
 if __name__ == '__main__':
     db = JsonDatabase()
-    menu = Menu(db)
-    menu.main_menu()
+    menu = MainMenu(db)
+    menu.main_loop()
+# todo fix back method in BaseMenu
