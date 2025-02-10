@@ -87,3 +87,7 @@ def print_separator(func):
         return result
 
     return wrapper
+
+
+def add_space_to_camelcase(string):
+    return re.sub(r'(?<!^)(?=[A-Z])', ' ', string)

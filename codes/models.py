@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class User:
     UniqueFields = ['username']
 
@@ -8,9 +11,10 @@ class User:
 
 
 class Book:
-    def __init__(self, title, author, isbn):
+    def __init__(self, title, author, genre, isbn):
         self.title = title
         self.author = author
+        self.genre = genre
         self.is_available = True
         self.isbn = isbn
 
@@ -18,9 +22,10 @@ class Book:
 class LoanBook:
     Statuses = ['pending', 'approved', 'declined', 'returned']
 
-    def __init__(self, user: User, book: Book, loan_date, return_date):
+    def __init__(self, user: User, book: Book):
         self.user = user
         self.book = book
-        self.loan_date = loan_date
-        self.return_date = return_date
-        self.status = 'pending'
+        self.loan_request_date = datetime.now()
+        self.loan_approval_date = None
+        self.loan_return_date = None
+        self.status = LoanBook.Statuses[0]

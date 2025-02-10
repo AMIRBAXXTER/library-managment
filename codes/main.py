@@ -5,4 +5,3 @@ if __name__ == '__main__':
     db = JsonDatabase()
     menu = MainMenu(db)
     menu.main_loop()
-# todo fix back method in BaseMenu

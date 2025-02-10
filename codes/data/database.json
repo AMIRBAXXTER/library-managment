@@ -12,5 +12,15 @@
             "is_admin": false,
             "id": 2
         }
+    },
+    "Book": {
+        "1": {
+            "title": "Math",
+            "author": "David Guetta",
+            "genre": "Study",
+            "is_available": true,
+            "isbn": "1345678",
+            "id": 1
+        }
     }
 }

@@ -52,8 +52,8 @@ class BookController:
     def __init__(self, db):
         self.db = db
 
-    def create_book(self, title, author, isbn):
-        book = Book(title, author, isbn)
+    def create_book(self, title, author, genre, isbn):
+        book = Book(title, author, genre, isbn)
         created = self.db.save(book)
         if created:
             print(f'Book {title} created')
@@ -70,7 +70,9 @@ class BookController:
     def get_book(self, book_id):
         return self.db.get(Book, book_id)
 
-    def get_books(self):
+    def get_books(self, genre=None):
+        if genre:
+            return self.db.filter(Book, genre=genre)
         return self.db.all(Book)
 
 
@@ -79,19 +81,23 @@ class LoanController:
     def __init__(self, db):
         self.db = db
 
-    def create_loan(self, book_id, user_id, status='pending'):
+    def create_loan(self, book_id, user_id):
         book = self.db.get(Book, book_id)
         user = self.db.get(User, user_id)
         if book and user:
-            loan = LoanBook(book_id, user_id, status)
+            loan = LoanBook(book_id, user_id)
             created = self.db.save(loan)
             if created:
                 print(f'Loan {book_id} created')
+        else:
+            print('Book or User not found')
 
     def update_loan(self, loan_id, values: dict):
         loan = self.db.update(LoanBook, loan_id, values)
         if loan:
             print(f'Loan {loan_id} updated')
+        else:
+            print('Loan not found')
 
     def get_loan(self, loan_id):
         return self.db.get(LoanBook, loan_id)

@@ -73,7 +73,7 @@ class JsonDatabase(LoadOrInitializeMixin):
         entity = self.get(entity_class, entity_id)
         if entity:
             for key, value in values.items():
-                if key in entity:
+                if key in entity and value:
                     entity[key] = value
                 else:
                     print(f'{key} is not a valid field')
@@ -92,6 +92,9 @@ class JsonDatabase(LoadOrInitializeMixin):
 
         class_name = entity_class.__name__
 
+        if not self.data.get(class_name):
+            return []
+
         return [entity for entity in self.data[class_name].values() if
                 all(entity[key] == value for key, value in kwargs.items())]
 
@@ -99,7 +102,7 @@ class JsonDatabase(LoadOrInitializeMixin):
 
         class_name = entity_class.__name__
 
-        return [entity for entity in self.data[class_name].values()]
+        return [entity for entity in self.data[class_name].values()] if self.data.get(class_name) else []
 
     def exists(self, entity_class, **kwargs):
 
