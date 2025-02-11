@@ -1,4 +1,4 @@
-<p align="center"><a href="#persian-version">فارسی</a> </p>
+# <p align="center"><a href="#persian-version">فارسی</a> </p>
 
 ---
 
