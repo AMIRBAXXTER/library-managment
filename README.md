@@ -1,4 +1,4 @@
-# <p align="center"><a href="#persian-version">فارسی</a> </p>
+<p align="center"><a href="#persian-version"> ⬇️ نسخه ی فارسی</a> </p>
 
 ---
 
@@ -100,7 +100,7 @@ Library Management System/
 
 ---
 
-<p align="center"> <a href="#english-version">English</a>
+<p align="center"> <a href="#english-version">English Version ⬆️</a>
 </p>
 ---
 
