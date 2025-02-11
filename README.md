@@ -1,6 +1,4 @@
-<p align="center"> <a href="#english-version">🇺🇸 English</a> | <a href="#persian-version">🇮🇷 فارسی</a> </p>
-
-
+ <a href="#persian-version">🇮🇷 فارسی</a> </p>
 
 ---
 
@@ -99,6 +97,10 @@ Library Management System/
 ## **⚠️ Important Security Notes**
 - Make sure to change the default admin password (`admin`) after the first run.
 - Sensitive information like passwords is only stored in hashed form in the system, ensuring complete security.
+
+---
+
+<p align="center"> <a href="#english-version">🇺🇸 English</a>
 
 ---
 
