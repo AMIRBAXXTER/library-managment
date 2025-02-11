@@ -1,6 +1,10 @@
 <p align=“center”> <a href=“#english-version”>🇺🇸 English</a> | <a href=“#نسخه-فارسی”>🇮🇷 فارسی</a> </p>
 
-English Version
+---
+
+## **English Version**
+
+---
 
 ### **README - Library Management System** 📚
 
@@ -95,6 +99,9 @@ Library Management System/
 - Sensitive information like passwords is only stored in hashed form in the system, ensuring complete security.
 
 ---
+
+## **نسخه فارسی**
+
 ---
 
 
