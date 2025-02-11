@@ -1,3 +1,99 @@
+### **README - Library Management System** 📚
+
+---
+
+## **🏗 Project Introduction**
+This project is a simple library management system developed in **Python**, allowing you to efficiently manage information related to users 📇, books 📖, and **loans** 🔄.  
+The system architecture is designed with a focus on **clean architecture** and **data security** to provide an optimized experience in managing library resources.
+
+---
+
+## **✨ Features**
+### **1. User Management**
+- 👩‍💻 Create, edit, and delete users.
+- 🔐 User authentication based on username and password.
+- 🛡 Security using advanced password hashing algorithms.
+- 👑 Ability to assign admin users with special permissions.
+
+### **2. Book Management**
+- 📚 Add, edit, and delete books.
+- 🔍 Store critical information such as title, author, genre, and ISBN.
+- ✅ Manage book availability status (available or unavailable).
+
+### **3. Loan Management**
+- 📥 Record loan requests from users.
+- 📤 Manage loan status (pending, approved, returned, etc.).
+- 🗓 Track key dates like loan request date and return date.
+
+### **4. Advanced Features in Text-Based User Interface**
+- 🔄 Navigate back to the previous menu at any time.
+- 🔁 Allow repeated selections until the user decides to exit.
+- 📜 Neat and readable separators and messages (to enhance clarity during execution and interaction).
+
+### **5. Security and Validation**
+- 🛡 Protect sensitive information by hashing passwords using `bcrypt`.
+- 🏅 Enforce strong password validation (minimum 8 characters, including uppercase, lowercase, numbers, and special characters).
+- 🚫 Prevent duplicate entries for users or books.
+
+### **6. Persistent Data Management**
+- 💽 Manage data using a lightweight JSON-based database.
+- ♾️ Use the **Singleton Pattern** to ensure data consistency during runtime.
+- 💾 Automatically save data securely when closing the program.
+
+---
+
+## **🗂 Project Structure**
+The structure is neatly and systematically designed to make code maintenance and development easier:
+```
+Library Management System/
+│
+├── config.py           # Default settings like admin credentials and separators
+├── main.py             # Entry point of the program
+├── models.py           # Information models for users, books, and loans
+├── controllers.py      # Management controllers
+├── json_database.py    # JSON database for accessing and managing data
+├── utils.py            # Utilities (hashing, validation, etc.)
+└── menu.py             # Main menu system for user interactions
+```
+
+---
+
+## **⚙️ Requirements**
+1. Install **Python 3.8** or later:  
+   To download Python: [Download Python](https://www.python.org/downloads/)
+2. Install the required libraries:  
+   To run the program, install the following dependencies:  
+   ```bash
+   pip install bcrypt
+   ```
+
+---
+
+## **🚀 How to Run the Project**
+1. **Program Execution:**  
+   Run the program using the following command:  
+   ```bash
+   python main.py
+   ```
+
+2. **Access the Program Interface:**  
+   - Use the following default credentials to log in:
+     - **Username:** `admin`
+     - **Password:** `admin`
+
+3. **Data Management:**  
+   - Use the program's simple yet powerful menu to perform various operations, such as adding users, registering books, or managing loans.
+
+---
+
+## **⚠️ Important Security Notes**
+- Make sure to change the default admin password (`admin`) after the first run.
+- Sensitive information like passwords is only stored in hashed form in the system, ensuring complete security.
+
+---
+---
+
+
 ### **README - سیستم مدیریت کتابخانه** 📚
 
 ---
