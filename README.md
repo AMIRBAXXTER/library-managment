@@ -1,4 +1,4 @@
-<p align="center"> <a href="#english-version">🇺🇸 English</a> | <a href="نسخه-فارسی#">🇮🇷 فارسی</a> </p>
+<p align="center"> <a href="#english-version">🇺🇸 English</a> | <a href=" #نسخه-فارسی">🇮🇷 فارسی</a> </p>
 
 
 ---
