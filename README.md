@@ -1,3 +1,5 @@
+<p align=“center”> <a href=“#english-version”>🇺🇸 English</a> | <a href=“#نسخه-فارسی”>🇮🇷 فارسی</a> </p>
+
 ### **README - Library Management System** 📚
 
 ---
